@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# CabShare Connect Backend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Node.js/Express backend for the CabShare Connect ride-sharing platform.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- User authentication with JWT
+- Ride creation and management
+- Booking system
+- Reviews and ratings
+- Admin dashboard
+- MongoDB database integration
 
-### `npm start`
+## Environment Variables
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Create a `.env` file in the server directory with the following variables:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```env
+MONGO_URI=mongodb://localhost:27017/cabshare
+JWT_SECRET=your_jwt_secret_here
+PORT=5000
+NODE_ENV=development
+```
 
-### `npm test`
+## Local Development
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+2. Start the server:
+   ```bash
+   npm start
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. The server will run on `http://localhost:5000`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## API Endpoints
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `GET /` - Health check
+- `GET /health` - Server status
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/rides` - Get all rides
+- `POST /api/rides` - Create a new ride
+- `GET /api/reviews` - Get reviews
+- `POST /api/reviews` - Create a review
+- `GET /api/admin/dashboard` - Admin dashboard
 
-### `npm run eject`
+## Deployment
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+This backend is configured for deployment on platforms like Render, Railway, or Heroku.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Required Environment Variables for Production:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- `MONGO_URI` - MongoDB connection string (use MongoDB Atlas for production)
+- `JWT_SECRET` - Strong secret for JWT token signing
+- `NODE_ENV` - Set to "production"
+- `PORT` - Port number (usually set by the hosting platform)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### CORS Configuration
 
-## Learn More
+The server is configured to accept requests from:
+- Development: `http://localhost:3000`, `http://localhost:3001`
+- Production: Update the CORS configuration in `index.js` with your frontend domain
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Database Setup
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Create a MongoDB Atlas cluster
+2. Get your connection string
+3. Set the `MONGO_URI` environment variable
+4. Run the sample data script: `node createSampleData.js`
 
-### Code Splitting
+## Sample Data
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Run the sample data script to populate the database with test data:
 
-### Analyzing the Bundle Size
+```bash
+node createSampleData.js
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This will create sample users, rides, and bookings for testing. 
